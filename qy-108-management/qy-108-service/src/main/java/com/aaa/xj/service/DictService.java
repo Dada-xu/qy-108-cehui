@@ -138,9 +138,9 @@ public class DictService extends BaseService<Dict> {
     public Integer updateDict(Dict dict){
         //判断要修改的数据是否为空
         if (null != dict && !"".equals(dict)){
-            try {
                 //不为空调用父类的方法执行修改操作
-                Integer update = dictMapper.updateDict(dict);
+                try {
+                    Integer update = dictMapper.updateDict(dict);
                 //判断修改受影响的行数
                 if (update > 0){
                     //如果大于0就返回受影响的行数
@@ -187,7 +187,13 @@ public class DictService extends BaseService<Dict> {
      */
     @Override
     public List<Dict> queryList(Dict dict) throws Exception {
-        return super.queryList(dict);
+        List<Dict> dicts = super.queryList(dict);
+        //判断查询结果是否为空
+        if (null != dicts && !"".equals(dicts)){
+            //不为空返回查询结果
+            return dicts;
+        }
+        return null;
     }
 
 }
